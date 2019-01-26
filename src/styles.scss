@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    // font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.waf-filter-value {
+
+    .ant-input-number-input {
+        border-radius: 2px;
+    }
+}
+
+.waf-filter-operator, .waf-filter-clear {
+    line-height: 30px;
+    text-align: center;
+
+    a {
+        color: #ff4c4e;
+    }
+}
+

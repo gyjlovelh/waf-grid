@@ -1,0 +1,116 @@
+<!--
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2019-01-25 10:46:08
+ * @LastEditTime: 2019-01-26 16:26:42
+ -->
+
+<nz-table #basicTable
+    class="waf-grid"
+    nzShowSizeChanger
+    [nzFrontPagination]="false"
+    [nzData]="gridModal.data"
+    [nzSize]="'small'"
+    [nzBordered]="true"
+    [nzShowPagination]="true"
+    [nzShowQuickJumper]="true"
+    [nzTitle]="headerTemplate"
+    [nzTotal]="gridModal.total"
+    [nzShowTotal]="totalTemplate"
+    [nzPageIndex]="gridModal.current"
+    [nzPageSize]="gridModal.pagesize"
+    [nzHideOnSinglePage]="false"
+    [nzPageSizeOptions]="[10, 20, 50, 100]"
+    [nzScroll]="{x: '2000px', y: '370px'}"
+    (nzPageIndexChange)="wafPageIndexChange($event)"
+    (nzPageSizeChange)="wafPageSizeChange($event)">
+    <thead nzSingleSort (nzSortChange)="wafSortChange($event)">
+        <tr>
+            <!-- 索引 -->
+            <th nzWidth="50px" nzLeft="0">序号</th>
+            <!-- checkebox -->
+            <th nzWidth="60px" nzLeft="50px" nzShowCheckbox>
+            </th>
+            <th *ngFor="let column of columns"
+                [nzWidth]="column.width + 'px'"
+                [nzShowSort]="true"
+                [nzSortKey]="column.field">
+                <span>{{column.title_zh}}</span>
+            </th>
+            <th style="padding-left: 20px;" nzWidth="150px" nzRight="0">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- 过滤行 -->
+        <tr *ngIf="isFilterVisable">
+            <td nzLeft="0">&nbsp;</td>
+            <td nzLeft="50px">&nbsp;</td>
+            <td *ngFor="let column of columns">
+                    <ng-container [ngSwitch]="column.filterType">
+                        <ng-container *ngSwitchCase="'string'">
+                            <waf-filter-string [field]="column.field" [filterType]="column.filterType"></waf-filter-string>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'numeric'">
+                            <waf-filter-numeric [field]="column.field" [filterType]="column.filterType"></waf-filter-numeric>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'date'">
+                            <waf-filter-date [field]="column.field" [filterType]="column.filterType"></waf-filter-date>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'dropdown'">
+                            <waf-filter-dropdown [field]="column.field" [filterType]="column.filterType"></waf-filter-dropdown>
+                        </ng-container>
+                    </ng-container>
+
+            </td>
+            <td nzRight="0">&nbsp;</td>
+        </tr>
+        <tr *ngFor="let item of gridModal.data; let index=index">
+            <td nzLeft="0">{{gridModal.offset + index + 1}}</td>
+            <td nzLeft="50px" nzShowCheckbox></td>
+            <td *ngFor="let column of columns">{{item[column.field]}}</td>
+            <td class="waf-action-wrap" nzRight="0">
+                <a class="action-item" title="详情"><i nz-icon type="snippets" theme="outline"></i></a>
+                <a class="action-item" title="编辑"><i nz-icon type="edit" theme="outline"></i></a>
+                <a class="action-item" title="复制"><i nz-icon type="copy" theme="outline"></i></a>
+                <a class="action-item" title="删除"><i nz-icon type="delete" theme="outline"></i></a>
+            </td>
+        </tr>
+
+    </tbody>
+
+    <!-- 头部工具栏 -->
+    <ng-template #headerTemplate>
+        <div class="waf-grid-toolbar">
+            <a class="toolbar-item" title="过滤" (click)="isFilterVisable = !isFilterVisable"><i nz-icon type="filter" theme="outline"></i></a>
+            <a class="toolbar-item" title="导出"><i nz-icon type="export" theme="outline"></i></a>
+            <a class="toolbar-item" title="列定制" (click)="isColumnSettingVisable = !isColumnSettingVisable"><i nz-icon type="setting" theme="outline"></i></a>
+        </div>
+    </ng-template>
+
+    <!-- 总条数和当前范围 -->
+    <ng-template #totalTemplate let-total let-range="range">
+        <span>共 {{total}} 条 【{{range[0]}} - {{range[1]}}】</span>
+    </ng-template>
+</nz-table>
+
+
+<nz-modal [nzVisible]="isColumnSettingVisable"
+        nzTitle="定制列"
+        [nzMaskClosable]="false"
+        (nzOnCancel)="isColumnSettingVisable = !isColumnSettingVisable"
+        [nzFooter]="modalFooter">
+
+    <nz-transfer
+        [nzDataSource]="columns"
+        [nzTitles]="['显示列', '隐藏列']">
+    </nz-transfer>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="primary">保存</button>
+        <button nz-button (click)="isColumnSettingVisable = !isColumnSettingVisable">取消</button>
+        <button nz-button>重置</button>
+    </ng-template>
+</nz-modal>

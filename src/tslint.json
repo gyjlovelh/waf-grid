@@ -12,6 +12,7 @@
             "element",
             "waf",
             "kebab-case"
-        ]
+        ],
+        "no-trailing-whitespace": [false]
     }
 }
