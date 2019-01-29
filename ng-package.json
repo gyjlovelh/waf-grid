@@ -4,6 +4,8 @@
         "entryFile": "./src/public_api.ts",
         "cssUrl": "inline",
         "languageLevel": [
+            "es5",
+            "es6",
             "dom",
             "es2017"
         ]

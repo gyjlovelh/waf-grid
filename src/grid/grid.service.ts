@@ -8,14 +8,14 @@ export class GridService {
      *
      */
     enumTranslate(field: string, tableName: string) {
-        
+
     }
 
     /**
      * 日期格式化
      *
-     * @param date
-     * @param format
+     * &param date
+     * &param format
      */
     dateFormat(date: string | Date, format = 'yyyy-MM-dd hh:mm:ss') {
         if (typeof date === 'string') {

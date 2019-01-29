@@ -1,10 +1,10 @@
 /**
  * {{desc}}
  *
- * @Author: guanyj
- * @Email: 18062791691@163.com
- * @Date: 2019-01-25 10:46:20
- * @LastEditTime: 2019-01-25 14:45:18
+ * &Author: guanyj
+ * &Email: 18062791691@163.com
+ * &Date: 2019-01-25 10:46:20
+ * &LastEditTime: 2019-01-25 14:45:18
  */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { GridColumns, GridResultModel } from './grid.model';
@@ -61,7 +61,7 @@ export class GridComponent {
     /**
      * 排序
      *
-     * @param sort
+     * &param sort
      */
     wafSortChange(sort: {key: string, value: any}) {
         // TODO: 暴露出去

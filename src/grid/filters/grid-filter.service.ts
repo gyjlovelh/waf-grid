@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Subject, Observable} from 'rxjs';
 
 @Injectable()
 export class GridFilterService {
 
     private filterValue = new Subject<Array<FilterDescriptor>>();
 
-    filterChange = this.filterValue.asObservable();
+    filterChange: Observable<Array<FilterDescriptor>> = this.filterValue.asObservable();
 
     commitChange(filter: Array<FilterDescriptor>) {
         this.filterValue.next(filter);

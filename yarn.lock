@@ -139,7 +139,7 @@
     reflect-metadata "^0.1.2"
     tsickle "^0.32.1"
 
-"@angular/compiler@^6.1.0":
+"@angular/compiler@~6.1.0":
   version "6.1.10"
   resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-6.1.10.tgz#6ab35c8584fbda13a6708df14b8b03cc8f849a94"
   dependencies:
@@ -269,6 +269,25 @@
     esutils "^2.0.2"
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
+
+"@jwaf/cache@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@jwaf/cache/-/cache-1.0.0.tgz#a3ca11495ff7d18bda2f32141ee0b8036613edcd"
+  dependencies:
+    "@angular/animations" "^6.1.0"
+    "@angular/common" "^6.1.0"
+    "@angular/compiler" "~6.1.0"
+    "@angular/core" "^6.1.0"
+    "@angular/forms" "^6.1.0"
+    "@angular/http" "^6.1.0"
+    "@angular/platform-browser" "^6.1.0"
+    "@angular/platform-browser-dynamic" "^6.1.0"
+    "@angular/router" "^6.1.0"
+    core-js "^2.5.4"
+    ng-zorro-antd "1.8.1"
+    rxjs "^6.0.0"
+    tslib "^1.9.0"
+    zone.js "~0.8.26"
 
 "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
@@ -1899,7 +1918,7 @@ di@^0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/di/-/di-0.0.1.tgz#806649326ceaa7caa3306d75d985ea2748ba913c"
 
-diff@^3.2.0:
+diff@^3.1.0, diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.npmjs.org/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
 
@@ -4018,6 +4037,10 @@ make-dir@^1.0.0, make-dir@^1.3.0:
   dependencies:
     pify "^3.0.0"
 
+make-error@^1.1.1:
+  version "1.3.5"
+  resolved "https://registry.npmjs.org/make-error/-/make-error-1.3.5.tgz#efe4e81f6db28cadd605c70f29c831b58ef776c8"
+
 map-age-cleaner@^0.1.1:
   version "0.1.3"
   resolved "https://registry.npmjs.org/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz#7d583a7306434c055fe474b0f45078e6e1b4b92a"
@@ -4354,7 +4377,7 @@ ng-packagr@^4.3.0:
     uglify-js "^3.0.7"
     update-notifier "^2.3.0"
 
-ng-zorro-antd@1.8.x:
+ng-zorro-antd@1.8.1:
   version "1.8.1"
   resolved "https://registry.npmjs.org/ng-zorro-antd/-/ng-zorro-antd-1.8.1.tgz#8a7fb34385e77cae40d102927e4f789d1aebe0d5"
   dependencies:
@@ -5955,7 +5978,7 @@ source-map-resolve@^0.5.0:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@^0.5.0, source-map-support@^0.5.5:
+source-map-support@^0.5.0, source-map-support@^0.5.3, source-map-support@^0.5.5:
   version "0.5.10"
   resolved "https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.10.tgz#2214080bc9d51832511ee2bab96e3c2f9353120c"
   dependencies:
@@ -6401,6 +6424,19 @@ trim-right@^1.0.1:
   dependencies:
     glob "^7.1.2"
 
+ts-node@~5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/ts-node/-/ts-node-5.0.1.tgz#78e5d1cb3f704de1b641e43b76be2d4094f06f81"
+  dependencies:
+    arrify "^1.0.0"
+    chalk "^2.3.0"
+    diff "^3.1.0"
+    make-error "^1.1.1"
+    minimist "^1.2.0"
+    mkdirp "^0.5.1"
+    source-map-support "^0.5.3"
+    yn "^2.0.0"
+
 tsickle@^0.32.1:
   version "0.32.1"
   resolved "https://registry.npmjs.org/tsickle/-/tsickle-0.32.1.tgz#f16e94ba80b32fc9ebe320dc94fbc2ca7f3521a5"
@@ -6415,9 +6451,9 @@ tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
-tslint@^5.12.1:
-  version "5.12.1"
-  resolved "https://registry.npmjs.org/tslint/-/tslint-5.12.1.tgz#8cec9d454cf8a1de9b0a26d7bdbad6de362e52c1"
+tslint@~5.9.1:
+  version "5.9.1"
+  resolved "https://registry.npmjs.org/tslint/-/tslint-5.9.1.tgz#1255f87a3ff57eb0b0e1f0e610a8b4748046c9ae"
   dependencies:
     babel-code-frame "^6.22.0"
     builtin-modules "^1.1.1"
@@ -6430,9 +6466,9 @@ tslint@^5.12.1:
     resolve "^1.3.2"
     semver "^5.3.0"
     tslib "^1.8.0"
-    tsutils "^2.27.2"
+    tsutils "^2.12.1"
 
-tsutils@^2.27.2:
+tsutils@^2.12.1:
   version "2.29.0"
   resolved "https://registry.npmjs.org/tsutils/-/tsutils-2.29.0.tgz#32b488501467acbedd4b85498673a0812aca0b99"
   dependencies:
@@ -6469,13 +6505,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-"typescript@>=2.6.2 <2.10", typescript@~2.9.1:
+"typescript@>=2.6.2 <2.10", typescript@^2.8.0, typescript@~2.9.1:
   version "2.9.2"
   resolved "https://registry.npmjs.org/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
-
-typescript@~2.7.2:
-  version "2.7.2"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
 uglify-es@^3.3.4:
   version "3.3.9"
@@ -7040,6 +7072,10 @@ yargs@^7.0.0:
 yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.npmjs.org/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
+
+yn@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
 zone.js@~0.8.26:
   version "0.8.29"

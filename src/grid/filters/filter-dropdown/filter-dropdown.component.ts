@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GridFilterService, FilterOperatorDescriptor } from 'src/grid/filters/grid-filter.service';
+import { GridFilterService, FilterOperatorDescriptor } from '../../filters/grid-filter.service';
 import { AbstractFilterComponent } from '../abstract-filter.component';
 
 @Component({
