@@ -6,10 +6,12 @@
  * &Date: 2019-01-25 10:46:20
  * &LastEditTime: 2019-01-25 14:45:18
  */
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ContentChildren, ContentChild } from '@angular/core';
 import { GridColumns, GridResultModel } from './grid.model';
 import { GridService } from './grid.service';
 import { GridFilterService, FilterDescriptor } from './filters/grid-filter.service';
+import { GridHeaderDirective } from './directive/grid-header.directive';
+import { NzTransferComponent } from 'ng-zorro-antd';
 
 @Component({
     selector: 'waf-grid',
@@ -43,7 +45,18 @@ export class GridComponent {
         return this._columns;
     }
 
+    get transfers() {
+        return this.columns.map(item => ({
+            key: item.field,
+            title: item.title_zh
+        }));
+    }
+
     @Output() dataSourceChange = new EventEmitter<any>();
+    @Output() customAction = new EventEmitter<any>();
+    @Output() columnChange = new EventEmitter<any>();
+
+    @ContentChild(GridHeaderDirective) leftHeaderTemplate: GridHeaderDirective;
 
     isFilterVisable = false;
     isColumnSettingVisable = false;
@@ -64,7 +77,12 @@ export class GridComponent {
      * &param sort
      */
     wafSortChange(sort: {key: string, value: any}) {
-        // TODO: 暴露出去
+        const sortValue = sort.value === 'ascend' ? 'asc' : sort.value === 'descend' ? 'desc' : sort.value;
+        this.gridModal.sort = {
+            sortField: sort.key,
+            sortValue: sortValue
+        };
+        this.updateGridViewSource();
     }
 
     wafPageIndexChange(index: number) {
@@ -82,10 +100,43 @@ export class GridComponent {
 
     }
 
+    onTransferChange(source: any) {
+        console.log('transferChange', source);
+    }
+
+    onColumnsSave(transfer: NzTransferComponent) {
+        this.columnChange.emit({
+            left: transfer.leftDataSource,
+            right: transfer.rightDataSource
+        });
+    }
+
+    onColumnsReset(transfer: NzTransferComponent) {
+        transfer.leftDataSource = transfer.leftDataSource.concat(transfer.rightDataSource);
+        transfer.rightDataSource = [];
+        // todo
+    }
+
+    onDetail(item: any) {
+        this.customAction.emit({type: 'detail', data: item});
+    }
+
+    onEdit(item: any) {
+        this.customAction.emit({type: 'edit', data: item});
+    }
+
+    onCopy(item: any) {
+        this.customAction.emit({type: 'copy', data: item});
+    }
+
+    onDelete(item: any) {
+        this.customAction.emit({type: 'delete', data: item});
+    }
+
     private updateGridViewSource() {
         this.dataSourceChange.emit({
             filters: this.filters,
-            sort: [],
+            sort: this.gridModal.sort,
             pagesize: this.gridModal.pagesize,
             offset: this.gridModal.offset
         });

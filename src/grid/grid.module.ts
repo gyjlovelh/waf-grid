@@ -13,6 +13,9 @@ import { FilterStringComponent } from './filters/filter-string/filter-string.com
 import { FilterDateComponent } from './filters/filter-date/filter-date.component';
 import { FilterDropdownComponent } from './filters/filter-dropdown/filter-dropdown.component';
 import { CacheModule } from '@jwaf/cache';
+import { GridHeaderDirective } from './directive/grid-header.directive';
+import { DragDirective } from './directive/drag.directive';
+import { ValuePipe } from './pipe/value.pipe';
 
 @NgModule({
     imports: [
@@ -28,10 +31,16 @@ import { CacheModule } from '@jwaf/cache';
         FilterNumericComponent,
         FilterStringComponent,
         FilterDateComponent,
-        FilterDropdownComponent
+        FilterDropdownComponent,
+        GridHeaderDirective,
+        DragDirective,
+        ValuePipe
     ],
     exports: [
-        GridComponent
+        GridComponent,
+        DragDirective,
+        GridHeaderDirective,
+        ValuePipe
     ],
     entryComponents: [
         FilterNumericComponent,

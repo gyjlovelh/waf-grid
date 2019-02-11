@@ -5,30 +5,17 @@
  * &LastEditTime: 2019-01-26 18:10:19
  -->
 <div nz-row nzType="flex" nzJustify="start">
-    <div nz-col nzSpan="16" class="waf-filter-value">
-        <nz-select #select style="width: 100%;" nzPlaceHolder="Choose">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-            <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+    <div nz-col nzSpan="24" class="waf-filter-value">
+        <nz-select #select style="width: 100%;"
+            [(ngModel)]="value"
+            [nzMode]="'multiple'"
+            [nzAllowClear]="false"
+            (nzOpenChange)="wafDateSearch($event)"
+            nzPlaceHolder="选择枚举值">
+            <nz-option *ngFor="let item of dropdown"
+                [nzValue]="item.value"
+                [nzLabel]="item.label">
+            </nz-option>
         </nz-select>
-    </div>
-    <div nz-col nzSpan="4" class="waf-filter-operator">
-        <nz-dropdown [nzTrigger]="'click'">
-            <a nz-dropdown><i nz-icon style="font-size: 16px" type="filter" theme="fill"></i></a>
-            <ul nz-menu nzSelectable>
-                <li nz-menu-item>
-                    <a>大于</a>
-                </li>
-                <li nz-menu-item>
-                    <a>小于</a>
-                </li>
-                <li nz-menu-item>
-                    <a>等于</a>
-                </li>
-            </ul>
-        </nz-dropdown>
-    </div>
-    <div [hidden]="!value" nz-col nzSpan="4" class="waf-filter-clear">
-        <a><i nz-icon type="delete" theme="fill"></i></a>
     </div>
 </div>

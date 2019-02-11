@@ -2,7 +2,7 @@
  * @Author: guanyj
  * @Email: 18062791691@163.com
  * @Date: 2019-01-25 10:46:08
- * @LastEditTime: 2019-01-26 16:26:42
+ * @LastEditTime: 2019-02-10 19:43:24
  -->
 
 <nz-table #basicTable
@@ -31,11 +31,13 @@
             <!-- checkebox -->
             <th nzWidth="60px" nzLeft="50px" nzShowCheckbox>
             </th>
-            <th *ngFor="let column of columns"
+            <th *ngFor="let column of columns;let index=index;"
                 [nzWidth]="column.width + 'px'"
                 [nzShowSort]="true"
                 [nzSortKey]="column.field">
                 <span>{{column.title_zh}}</span>
+
+                <a [wafDrag]="column" *ngIf="index !== columns.length - 1" class="drag-line"></a>
             </th>
             <th style="padding-left: 20px;" nzWidth="150px" nzRight="0">操作</th>
         </tr>
@@ -60,7 +62,7 @@
                         </ng-container>
 
                         <ng-container *ngSwitchCase="'dropdown'">
-                            <waf-filter-dropdown [field]="column.field" [filterType]="column.filterType"></waf-filter-dropdown>
+                            <waf-filter-dropdown [field]="column.field" [dropdown]="column.dropdown" [filterType]="column.filterType"></waf-filter-dropdown>
                         </ng-container>
                     </ng-container>
 
@@ -70,12 +72,22 @@
         <tr *ngFor="let item of gridModal.data; let index=index">
             <td nzLeft="0">{{gridModal.offset + index + 1}}</td>
             <td nzLeft="50px" nzShowCheckbox></td>
-            <td *ngFor="let column of columns">{{item[column.field]}}</td>
+            <td *ngFor="let column of columns">
+                {{item[column.field] | gridValue:column}}
+            </td>
             <td class="waf-action-wrap" nzRight="0">
-                <a class="action-item" title="详情"><i nz-icon type="snippets" theme="outline"></i></a>
-                <a class="action-item" title="编辑"><i nz-icon type="edit" theme="outline"></i></a>
-                <a class="action-item" title="复制"><i nz-icon type="copy" theme="outline"></i></a>
-                <a class="action-item" title="删除"><i nz-icon type="delete" theme="outline"></i></a>
+                <a class="action-item" title="详情" (click)="onDetail(item)"><i nz-icon type="snippets" theme="outline"></i></a>
+                <a class="action-item" title="编辑" (click)="onEdit(item)"><i nz-icon type="edit" theme="outline"></i></a>
+                <a class="action-item" title="复制" (click)="onCopy(item)"><i nz-icon type="copy" theme="outline"></i></a>
+                <a class="action-item"
+                    nz-popconfirm nzTitle="确认删除？"
+                    nzPlacement="topRight"
+                    title="删除"
+                    [nzCancelText]="'取消'"
+                    [nzOkText]="'确定'"
+                    (nzOnConfirm)="onDelete(item)">
+                    <i nz-icon type="delete" theme="outline"></i>
+                </a>
             </td>
         </tr>
 
@@ -83,6 +95,10 @@
 
     <!-- 头部工具栏 -->
     <ng-template #headerTemplate>
+        <div class="waf-grid-left-toolbar">
+            <ng-container *ngTemplateOutlet="leftHeaderTemplate?.template;"></ng-container>
+        </div>
+
         <div class="waf-grid-toolbar">
             <a class="toolbar-item" title="过滤" (click)="isFilterVisable = !isFilterVisable"><i nz-icon type="filter" theme="outline"></i></a>
             <a class="toolbar-item" title="导出"><i nz-icon type="export" theme="outline"></i></a>
@@ -104,13 +120,20 @@
         [nzFooter]="modalFooter">
 
     <nz-transfer
+        #transfer
         [nzDataSource]="columns"
-        [nzTitles]="['显示列', '隐藏列']">
+        [nzRender]="render"
+        [nzTitles]="['显示列', '隐藏列']"
+        (nzChange)="onTransferChange($event)">
+
+        <ng-template #render let-dataItem>
+            {{dataItem.title || dataItem.title_zh}}
+        </ng-template>
     </nz-transfer>
 
     <ng-template #modalFooter>
-        <button nz-button nzType="primary">保存</button>
+        <button nz-button (click)="onColumnsSave(transfer)" nzType="primary">保存</button>
         <button nz-button (click)="isColumnSettingVisable = !isColumnSettingVisable">取消</button>
-        <button nz-button>重置</button>
+        <button nz-button (click)="onColumnsReset(transfer)">重置</button>
     </ng-template>
 </nz-modal>

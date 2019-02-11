@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { GridModule } from 'src/grid/grid.module';
+import { CacheModule } from '@jwaf/cache';
 import { AppService } from './app.service';
 registerLocaleData(zh);
 
@@ -20,7 +21,8 @@ registerLocaleData(zh);
         IconModule,
         HttpClientModule,
         NgZorroAntdModule,
-        GridModule
+        GridModule,
+        CacheModule
     ],
     providers: [
         { provide: NZ_I18N, useValue: zh_CN },

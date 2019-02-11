@@ -20,6 +20,7 @@
         "@angular/platform-browser",
         "@angular/platform-browser-dynamic",
         "@angular/router",
+        "@jwaf/cache",
         "ng-zorro-antd",
         "core-js",
         "rxjs",

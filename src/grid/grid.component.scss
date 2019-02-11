@@ -3,6 +3,25 @@
 
 .waf-grid {
 
+    .drag-line {
+        position: absolute;
+        right: -1px;
+        top: 0;
+        cursor: ew-resize;
+        height: 38px;
+        width: 2px;
+        z-index: 99;
+    }
+
+    // 自定义按钮栏
+    .waf-grid-left-toolbar {
+        float: left;
+        height: 50px;
+        line-height: 50px;
+        z-index: 99;
+    }
+
+    // 工具栏
     .waf-grid-toolbar {
         height: 50px;
 

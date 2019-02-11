@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GridFilterService, FilterOperatorDescriptor } from '../../filters/grid-filter.service';
 import { AbstractFilterComponent } from '../abstract-filter.component';
 
@@ -8,14 +8,18 @@ import { AbstractFilterComponent } from '../abstract-filter.component';
 })
 export class FilterDropdownComponent extends AbstractFilterComponent {
 
+    @Input() dropdown: any[] = [];
+
     constructor(
         protected $filterService: GridFilterService
     ) {
         super($filterService);
     }
 
-    wafDateSearch(code: string) {
-        this.onChange(code, FilterOperatorDescriptor.equal);
+    wafDateSearch(open: boolean) {
+        if (!open) {
+            this.onChange(this.value, FilterOperatorDescriptor.in);
+        }
     }
 
     clear() {
